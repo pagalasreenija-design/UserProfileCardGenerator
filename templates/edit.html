@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+    <h2>Profile Card Generator</h2>
+
+    <a href="/profiles" class="nav-btn">
+        Back
+    </a>
+</nav>
+
+<div class="container">
+
+    <h1>Edit Profile</h1>
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="name"
+            value="{{ profile[1] }}"
+            required>
+
+        <textarea
+            name="bio"
+            required>{{ profile[2] }}</textarea>
+
+        <button type="submit">
+            Update Profile
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

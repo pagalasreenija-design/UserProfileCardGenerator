@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Card Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav class="navbar">
+    <h2>Profile Card Generator</h2>
+
+    <a href="/profiles" class="nav-btn">
+        View Profiles
+    </a>
+</nav>
+
+    <div class="container">
+
+        <h1>User Profile Card Generator</h1>
+<p class="subtitle">
+    Create a beautiful profile card in seconds.
+</p>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required>
+
+            <textarea
+                name="bio"
+                placeholder="Write your bio"
+                required></textarea>
+
+            <label for="image">
+    Upload Profile Image
+</label>
+
+<input
+    type="file"
+    id="image"
+    name="image"
+    accept="image/*"
+    required>
+    <div class="preview-container">
+    <img id="preview" src="" alt="Image Preview">
+</div>
+
+            <button type="submit">
+                Generate Profile
+            </button>
+            <a href="/profiles" class="view-btn">
+    View Saved Profiles
+</a>
+
+        </form>
+        {% if name %}
+
+<div class="profile-card">
+
+    <img src="{{ url_for('static', filename=image) }}" alt="Profile Image">
+
+    <h2>{{ name }}</h2>
+
+    <p>{{ bio }}</p>
+    <button id="downloadBtn" type="button">
+    Download Profile Card
+</button>
+
+</div>
+
+{% endif %}
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <footer class="footer">
+    <p>© 2026 User Profile Card Generator | Developed by Pagala Sreenija</p>
+</footer>
+
+</body>
+</html>

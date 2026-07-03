@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Profiles</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+    <h2>Profile Card Generator</h2>
+
+    <a href="/" class="nav-btn">
+        Create Profile
+    </a>
+</nav>
+
+<div class="container">
+
+    <div class="dashboard">
+
+<h1>Saved Profiles</h1>
+
+<div class="profile-count">
+    <h3>Total Profiles</h3>
+    <h1>{{ total_profiles }}</h1>
+</div>
+    </div>
+    <form method="GET" action="/profiles">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by name..."
+        value="{{ search }}">
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+    <div class="cards-grid">
+
+{% for profile in profiles %}
+
+<div class="profile-card" id="card{{ profile[0] }}">
+
+    <div class="download-area">
+
+        <img src="{{ url_for('static', filename='uploads/' + profile[3]) }}" alt="Profile">
+
+        <h2>{{ profile[1] }}</h2>
+
+        <p>{{ profile[2] }}</p>
+
+    </div>
+
+    <button
+        class="download-btn"
+        onclick="downloadCard('card{{ profile[0] }}')">
+        Download
+    </button>
+
+    <hr style="margin:15px 0; border:none; border-top:1px solid #e5e7eb;">
+
+    <div class="button-group">
+
+        <a href="/edit/{{ profile[0] }}" class="edit-btn">
+            Edit
+        </a>
+
+        <a href="/delete/{{ profile[0] }}"
+           class="delete-btn"
+           onclick="return confirm('Delete this profile?')">
+            Delete
+        </a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
